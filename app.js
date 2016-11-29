@@ -51,8 +51,25 @@ collectAll();
 console.log('off limits: ' + offLimits);
 
 function clickHandler(event){
+  addClick();
   changePics();
   collectAll();
+}
+
+function addClick(){
+  var img = event.target;
+  var imgscr = img.src;
+  var imgPath = imgscr.split('assets')[1];
+
+  for (var c = 0 ; c < imageObjects.length; c++){ // for ever object we have
+
+    if ( imgPath === '/' + imageObjects[c].path){ //check if the src of img matches any of our objects' path values
+      imageObjects[c].clickCount ++; }//when coresponding object located, itterate its clickCount
+// identify image elemetn firing event
+// get tthat img src
+// check object list sorces for a match
+// itterate click count for identified object.
+  }
 }
 
 function changePics (){
