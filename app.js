@@ -73,27 +73,47 @@ function addClick(){
 }
 
 function changePics (){
+  var indeces = genrateRandIndeces();
+
   var pic = document.getElementById('imageOne');
-  var randomIndex1 =  randomNumber(); //update random number to avoid off limit arrray values
+  var randomIndex1 =  indeces[0]; //update random number to avoid off limit arrray values
   pic.src = 'assets/' + imagePaths[randomIndex1]; //change imageOne
-  inUse[0] = randomIndex1;
+
 
   var pic2 = document.getElementById('imageTwo');
-  var randomIndex2 = randomNumber();
+  var randomIndex2 = indeces[1];
   pic2.src = 'assets/' + imagePaths[randomIndex2]; //change imageOne
-  inUse[1] = randomIndex2;
+
 
   var pic3 = document.getElementById('imageThree');
-  var randomIndex3 = randomNumber();
+  var randomIndex3 = indeces[2];
   pic3.src = 'assets/' + imagePaths[randomIndex3]; //change imageOne
-  inUse[2] = randomIndex3;
+
 }
 
 function randomNumber () {
   var rand;
   rand = Math.floor(Math.random() * imagePaths.length);
-  if (rand === offLimits[0] || offLimits [1] || offLimits [2] || offLimits[3] || offLimits[4] || offLimits[5] || inuse[0] || inUse[1] || inUse[2]){
+  if (rand === offLimits[0] || offLimits [1] || offLimits [2] || offLimits[3] || offLimits[4] || offLimits[5] ){
     rand = Math.floor(Math.random() * imagePaths.length);
   }
   return(rand);
+}
+
+function genrateRandIndeces () {
+  var randomIndex1a;
+  var randomIndex2a;
+  var randomIndex3a;
+
+  randomIndex1a = randomNumber();
+  randomIndex2a = randomNumber();
+  randomIndex3a = randomNumber();
+
+  while (randomIndex2a === randomIndex1a){
+    randomIndex2a = randomNumber();
+  }
+  while (randomIndex3a === randomIndex2a || randomIndex3a === randomIndex1a){
+    randomIndex3a = randomNumber();
+  }
+  return ([randomIndex1a, randomIndex2a, randomIndex3a]);
 }
