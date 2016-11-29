@@ -1,5 +1,7 @@
 #Lab 3 User Stories
 
+"as a ____ I want ______"
+
 Marketing Research Team:
 
   we want to collect relevant data.
