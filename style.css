@@ -1,0 +1,13 @@
+img{
+  width:300px;
+}
+div{
+  display: inline-block;
+  border: 5px solid black;
+  border-radius: 5px;
+
+}
+main{
+  width:1200px;
+  margin: 0 auto;
+}
