@@ -125,80 +125,77 @@ function genrateRandIndeces () {
   return ([randomIndex1a, randomIndex2a, randomIndex3a]);
 }
 
-// var dataSet = { //creat dataSetobject with a key:value pair that describes the data pairing scheme
-//   productName: ['timesDisplayed', 'timesClicked', 'dispayed/clicked']
-// };
-//
-// function populateDataSet () {
-//   for (var f = 0 ; f < imageObjects.length; f++){ //for as many images as we have, create a property in the data set object with a key name equivilant to that images product name and a value of the relevant data for each product
-//     dataSet.imageObjects[f].name = [imageObjects[f].timesDisplayed, imageObjects[f].timesClicked, imageObjects[f].timesDisplayed / imageObjects[f].timesClicked];
-//   }
-// }
-//
-// populateDataSet();
 
-
-
-//call create chart after 25 clicks and an alert of some kind
-function createChart() {
-
-
-  var marketingChart = {
-    type: 'bar',
-    data: {
-      labels: [],
-      datasets: [{
-        label: 'Marketing Data',
-        data: [12, 19, 3, 5, 2, 3],// must create an array that represernts the data I wish to model
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1
+var marketingChart = {
+  type: 'bar',
+  data: {
+    labels: [],
+    datasets: [{
+      label: 'Marketing Data',
+      data: [],// must create an array that represernts the data I wish to model
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+      ],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero:true
+        }
       }]
-    },
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero:true
-          }
-        }]
-      }
-    }
-  };
-  function creatLabels (){
-    marketingChart.labels = []; //clear existin labels
-    for( var x = 0; x < imageObjects.length; x++){
-      marketingChart.labels.push('# of times ' + imageObjects[x].name + ' appeared');
-      marketingChart.labels.push('# of times ' + imageObjects[x].name + ' chosen');
-      marketingChart.labels.push('Percentage ' + imageObjects[x].name + ' was chosen when it appeared');
     }
   }
-  creatLabels();
+};
+
+function createChart() {
+
+  function creatLabelsandColors (){
+    marketingChart[data][datasets][labels] = []; //clear existing labels
+    marketingChart[data][datasets][backgroundColor] = []; //clear existing colors
+    marketingChart[data][datasets][borderColor] = []; //clear existing colors
+    for( var x = 0; x < imageObjects.length; x++){
+      marketingChart[data][datasets].labels.push('# of times ' + imageObjects[x].name + ' appeared');
+      marketingChart[data][datasets].backgroundColor.push('rgba(255, 99, 132, 0.2)');
+      marketingChart[data][datasets].borderColor.push('rgba(255,99,132,1)');
+      marketingChart[data][datasets].labels.push('# of times ' + imageObjects[x].name + ' chosen');
+      marketingChart[data][datasets].backgroundColor.push('rgba(54, 162, 235, 0.2)');
+      marketingChart[data][datasets].borderColor.push('rgba(54, 162, 235, 1)');
+      marketingChart[data][datasets].labels.push('Percentage ' + imageObjects[x].name + ' was chosen when it appeared');
+      marketingChart[data][datasets].backgroundColor.push('rgba(255, 206, 86, 0.2)');
+      marketingChart[data][datasets].borderColor.push('rgba(255, 206, 86, 1)');
+    }
+  }
+  creatLabelsandColors();
+
   function populateChartDataArray () {
-    marketingChart.data = [];
+    marketingChart[data][datasets].data = [];
     for( var z = 0; z < imageObjects.length; z++){
       var td = imageObjects[z].timesDisplayed;
       var tc = imageObjects[z].timesClicked;
-      marketingChart.data.push(td);
-      marketingChart.data.push(tc);
-      marketingChart.data.push( td / tc);
+      marketingChart[data][datasets].data.push(td);
+      marketingChart[data][datasets].data.push(tc);
+      marketingChart[data][datasets].data.push( td / tc);
     }
   }
   populateChartDataArray ();
+
   var ctx = document.getElementById('myChart');
   var myChart = new Chart(ctx, marketingChart);
+
 }
