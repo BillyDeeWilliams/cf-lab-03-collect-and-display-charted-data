@@ -192,7 +192,7 @@ function createChart() {
       var tc = imageObjects[z].clickCount;
       marketingChart.data.datasets[0].data.push(td);
       marketingChart.data.datasets[0].data.push(tc);
-      marketingChart.data.datasets[0].data.push( td / tc);
+      marketingChart.data.datasets[0].data.push( 100 * (tc / td));
     }
   }
   populateChartDataArray ();
