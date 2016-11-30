@@ -51,13 +51,15 @@ collectAll();
 console.log('off limits: ' + offLimits);
 
 function clickHandler(event){
-  if (globalClickCount < 26){
-    addClick();
-    changePics();
-    collectAll();
-    globalClickCount++;
+  if (globalClickCount > 25){
+    return;
   }
-  else if(globalClickCount === 25){
+  addClick();
+  changePics();
+  collectAll();
+  globalClickCount++;
+
+  if(globalClickCount === 25){
     alert('Thank you for your participation!');
     createChart();
   }
@@ -166,31 +168,31 @@ var marketingChart = {
 function createChart() {
 
   function creatLabelsandColors (){
-    marketingChart[data][datasets][labels] = []; //clear existing labels
-    marketingChart[data][datasets][backgroundColor] = []; //clear existing colors
-    marketingChart[data][datasets][borderColor] = []; //clear existing colors
+    marketingChart.data.labels = []; //clear existing labels
+    marketingChart.data.datasets[0].backgroundColor = []; //clear existing colors
+    marketingChart.data.datasets[0].borderColor = []; //clear existing colors
     for( var x = 0; x < imageObjects.length; x++){
-      marketingChart[data][datasets].labels.push('# of times ' + imageObjects[x].name + ' appeared');
-      marketingChart[data][datasets].backgroundColor.push('rgba(255, 99, 132, 0.2)');
-      marketingChart[data][datasets].borderColor.push('rgba(255,99,132,1)');
-      marketingChart[data][datasets].labels.push('# of times ' + imageObjects[x].name + ' chosen');
-      marketingChart[data][datasets].backgroundColor.push('rgba(54, 162, 235, 0.2)');
-      marketingChart[data][datasets].borderColor.push('rgba(54, 162, 235, 1)');
-      marketingChart[data][datasets].labels.push('Percentage ' + imageObjects[x].name + ' was chosen when it appeared');
-      marketingChart[data][datasets].backgroundColor.push('rgba(255, 206, 86, 0.2)');
-      marketingChart[data][datasets].borderColor.push('rgba(255, 206, 86, 1)');
+      marketingChart.data.labels.push('# of times ' + imageObjects[x].name + ' appeared');
+      marketingChart.data.datasets[0].backgroundColor.push('rgba(255, 99, 132, 0.2)');
+      marketingChart.data.datasets[0].borderColor.push('rgba(255,99,132,1)');
+      marketingChart.data.labels.push('# of times ' + imageObjects[x].name + ' chosen');
+      marketingChart.data.datasets[0].backgroundColor.push('rgba(54, 162, 235, 0.2)');
+      marketingChart.data.datasets[0].borderColor.push('rgba(54, 162, 235, 1)');
+      marketingChart.data.labels.push('Percentage ' + imageObjects[x].name + ' was chosen when it appeared');
+      marketingChart.data.datasets[0].backgroundColor.push('rgba(255, 206, 86, 0.2)');
+      marketingChart.data.datasets[0].borderColor.push('rgba(255, 206, 86, 1)');
     }
   }
   creatLabelsandColors();
 
   function populateChartDataArray () {
-    marketingChart[data][datasets].data = [];
+    marketingChart.data.datasets[0].data = [];
     for( var z = 0; z < imageObjects.length; z++){
-      var td = imageObjects[z].timesDisplayed;
-      var tc = imageObjects[z].timesClicked;
-      marketingChart[data][datasets].data.push(td);
-      marketingChart[data][datasets].data.push(tc);
-      marketingChart[data][datasets].data.push( td / tc);
+      var td = imageObjects[z].displayCount;
+      var tc = imageObjects[z].clickCount;
+      marketingChart.data.datasets[0].data.push(td);
+      marketingChart.data.datasets[0].data.push(tc);
+      marketingChart.data.datasets[0].data.push( td / tc);
     }
   }
   populateChartDataArray ();
