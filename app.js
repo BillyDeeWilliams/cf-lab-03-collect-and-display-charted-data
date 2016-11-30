@@ -3,19 +3,48 @@ var imagePaths = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfa
 var imageObjects = [];
 var offLimits = [];
 var globalClickCount = 0;
+var listInLocalStorage = false;
 
-for (var i = 0 ; i < imagePaths.length; i++ ){ // populate objects array
-  var newProductObject = new ImageObject (imagePaths[i]); //for every filepath in the paths array, create a product objects that has a propety path with a value equal to that path
-  imageObjects.push(newProductObject); //add each new object into the object array
+function isItInLocalStorageALready () {
+
+  if (localStorage.getItem('imageObjectsPersist') === null){
+    listInLocalStorage = false; //it does not exist in local storage yet
+  }
+  else{
+    listInLocalStorage = true; //it already esists in local storage and we need to JSON import it.
+    var retrieval = localStorage.getItem('imageObjectsPersist'); //gets stringified imageobjects array from local storage in property value imageObjectsPersist
+    var returnToWOrkingArrayState = JSON.parse(retrieval); // parse stringified array back into workable array
+    imageObjects = returnToWOrkingArrayState; //pass workable array into imageObjects to be modified this session
+
+  }
+  return listInLocalStorage;
 }
-console.log(imageObjects); //log the objects array
+isItInLocalStorageALready();
+//is it is not on the local storage already
+//check local storage if imageobjects exists already
+//if yes then import and update
+//if no make a new one
+
+function createArrayofProductObjectsIfNeeded (){
+  if (listInLocalStorage){
+    return;
+  }
+  else{
+    for (var i = 0 ; i < imagePaths.length; i++ ){ // populate objects array
+      var newProductObject = new ImageObject (imagePaths[i]); //for every filepath in the paths array, create a product objects that has a propety path with a value equal to that path
+      imageObjects.push(newProductObject); //add each new object into the object array
+    }
+  // console.log(imageObjects); //log the objects array
+  }
+}
+createArrayofProductObjectsIfNeeded(); //nice function name broseph
 
 
 var displayArea = document.getElementById('imageArea'); //select dom node, reffer to it with a var
 displayArea.addEventListener('click', clickHandler); //add listener to  specific element dom node. now whenver the click even happens
  // on any element within the node that displayArea is poinint at, a click even should be fired from that element.
 
-function ImageObject (path){
+function ImageObject (path){ //image Object Conrstuctor
   this.path = path;
   this.name = path.split('.')[0];
   this.clickCount = 0;
@@ -62,6 +91,7 @@ function clickHandler(event){
   if(globalClickCount === 25){
     alert('Thank you for your participation!');
     createChart();
+    saveToLS();
   }
 }
 
@@ -131,7 +161,7 @@ function genrateRandIndeces () {
 var marketingChart = {
   type: 'bar',
   data: {
-    labels: [],
+    labels: [],//labels go here
     datasets: [{
       label: 'Marketing Data',
       data: [],// must create an array that represernts the data I wish to model
@@ -199,5 +229,11 @@ function createChart() {
 
   var ctx = document.getElementById('myChart');
   var myChart = new Chart(ctx, marketingChart);
+}
+
+function saveToLS (){ //saves array to ls in stringified format for later retrieval
+  var stringifiedArray = JSON.stringify(imageObjects); //change modified array of objects in string for local storage
+  localStorage.setItem('imageObjectsPersist', stringifiedArray); // save stringified version of imageobjects array ina property called imageObjectsPersist
+  //console.log(stringifiedArray);
 
 }
