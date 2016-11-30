@@ -2,7 +2,7 @@
 var imagePaths = ['bag.jpg', 'banana.jpg', 'bathroom.jpg', 'boots.jpg', 'breakfast.jpg', 'bubblegum.jpg', 'chair.jpg', 'cthulhu.jpg', 'dog-duck.jpg', 'dragon.jpg', 'pen.jpg', 'pet-sweep.jpg', 'scissors.jpg', 'shark.jpg', 'sweep.png', 'tauntaun.jpg', 'unicorn.jpg', 'usb.gif','water-can.jpg', 'wine-glass.jpg'];
 var imageObjects = [];
 var offLimits = [];
-var inUse = [0,0,0];
+
 
 for (var i = 0 ; i < imagePaths.length; i++ ){ // populate objects array
   var newProductObject = new ImageObject (imagePaths[i]); //for every filepath in the paths array, create a product objects that has a propety path with a value equal to that path
@@ -94,7 +94,7 @@ function changePics (){
 function randomNumber () {
   var rand;
   rand = Math.floor(Math.random() * imagePaths.length);
-  if (rand === offLimits[0] || offLimits [1] || offLimits [2] || offLimits[3] || offLimits[4] || offLimits[5] ){
+  if (rand === offLimits[0] || rand === offLimits[1] || rand === offLimits[2] || rand === offLimits[3] || rand === offLimits[4] || rand === offLimits[5] ){ //if yther number matches any of the off limit values, get another number
     rand = Math.floor(Math.random() * imagePaths.length);
   }
   return(rand);
@@ -117,3 +117,43 @@ function genrateRandIndeces () {
   }
   return ([randomIndex1a, randomIndex2a, randomIndex3a]);
 }
+
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, marketingChart)
+
+var marketingChart = {
+  type: 'bar',
+  data: {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [{
+      label: 'Marketing Data',
+      data: [12, 19, 3, 5, 2, 3],// mustc reate an array that represernts the data I wish to model
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+      ],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero:true
+        }
+      }]
+    }
+  }
+};
