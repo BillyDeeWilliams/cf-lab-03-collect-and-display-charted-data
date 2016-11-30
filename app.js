@@ -17,7 +17,7 @@ displayArea.addEventListener('click', clickHandler); //add listener to  specific
 
 function ImageObject (path){
   this.path = path;
-//  this.name = path - extension
+  this.name = path.split('.')[0];
   this.clickCount = 0;
   this.displayCount = 0;
 }
@@ -94,7 +94,7 @@ function changePics (){
 function randomNumber () {
   var rand;
   rand = Math.floor(Math.random() * imagePaths.length);
-  if (rand === offLimits[0] || rand === offLimits[1] || rand === offLimits[2] || rand === offLimits[3] || rand === offLimits[4] || rand === offLimits[5] ){ //if yther number matches any of the off limit values, get another number
+  while (rand === offLimits[0] || rand === offLimits[1] || rand === offLimits[2] || rand === offLimits[3] || rand === offLimits[4] || rand === offLimits[5] ){ //if yther number matches any of the off limit values, get another number
     rand = Math.floor(Math.random() * imagePaths.length);
   }
   return(rand);
@@ -118,6 +118,17 @@ function genrateRandIndeces () {
   return ([randomIndex1a, randomIndex2a, randomIndex3a]);
 }
 
+// function generateData () {
+//   for (var f = o ; f < imageObjects.length; f++){
+//     imageObjects[f].
+//   }
+//
+// }
+//
+// var dataSet = {
+//
+// }
+
 var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, marketingChart)
 
@@ -127,7 +138,7 @@ var marketingChart = {
     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
     datasets: [{
       label: 'Marketing Data',
-      data: [12, 19, 3, 5, 2, 3],// mustc reate an array that represernts the data I wish to model
+      data: [12, 19, 3, 5, 2, 3],// must create an array that represernts the data I wish to model
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
