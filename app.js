@@ -168,17 +168,17 @@ var marketingChart = {
 function createChart() {
 
   function creatLabelsandColors (){
-    marketingChart.data.datasets[0].labels = []; //clear existing labels
+    marketingChart.data.labels = []; //clear existing labels
     marketingChart.data.datasets[0].backgroundColor = []; //clear existing colors
     marketingChart.data.datasets[0].borderColor = []; //clear existing colors
     for( var x = 0; x < imageObjects.length; x++){
-      marketingChart.data.datasets[0].labels.push('# of times ' + imageObjects[x].name + ' appeared');
+      marketingChart.data.labels.push('# of times ' + imageObjects[x].name + ' appeared');
       marketingChart.data.datasets[0].backgroundColor.push('rgba(255, 99, 132, 0.2)');
       marketingChart.data.datasets[0].borderColor.push('rgba(255,99,132,1)');
-      marketingChart.data.datasets[0].labels.push('# of times ' + imageObjects[x].name + ' chosen');
+      marketingChart.data.labels.push('# of times ' + imageObjects[x].name + ' chosen');
       marketingChart.data.datasets[0].backgroundColor.push('rgba(54, 162, 235, 0.2)');
       marketingChart.data.datasets[0].borderColor.push('rgba(54, 162, 235, 1)');
-      marketingChart.data.datasets[0].labels.push('Percentage ' + imageObjects[x].name + ' was chosen when it appeared');
+      marketingChart.data.labels.push('Percentage ' + imageObjects[x].name + ' was chosen when it appeared');
       marketingChart.data.datasets[0].backgroundColor.push('rgba(255, 206, 86, 0.2)');
       marketingChart.data.datasets[0].borderColor.push('rgba(255, 206, 86, 1)');
     }
@@ -188,8 +188,8 @@ function createChart() {
   function populateChartDataArray () {
     marketingChart.data.datasets[0].data = [];
     for( var z = 0; z < imageObjects.length; z++){
-      var td = imageObjects[z].timesDisplayed;
-      var tc = imageObjects[z].timesClicked;
+      var td = imageObjects[z].displayCount;
+      var tc = imageObjects[z].clickCount;
       marketingChart.data.datasets[0].data.push(td);
       marketingChart.data.datasets[0].data.push(tc);
       marketingChart.data.datasets[0].data.push( td / tc);
