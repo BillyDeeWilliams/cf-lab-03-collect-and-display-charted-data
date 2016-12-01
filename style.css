@@ -30,3 +30,24 @@ header{
   margin: 0 auto;
   margin-bottom: 70px;
 }
+
+button{
+  background-color: teal;
+  color: white;
+  width: 200px;
+  height: 80px;
+  margin: 20px auto;
+  border-style: outset;
+  border:50xp;
+  border-radius: 5px;
+  font-family: impact, sans-serif;
+  font-size: 1.3em;
+
+  margin-left: 50%;
+}
+
+button:hover {
+    background-color: teal;
+    color: white;
+     box-shadow: 10px 10px 5px grey;
+}

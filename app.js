@@ -239,6 +239,9 @@ var clearLocal = document.getElementById('clear_local'); //select dom node, reff
 clearLocal.addEventListener('click', buttonHandler);
 
 function buttonHandler(event){
-  localStorage.clear();
-  globalClickCount = 0;
+  localStorage.clear(); //get rid of local storage version
+  globalClickCount = 0; // reset click counter
+  createArrayofProductObjectsIfNeeded(); //recreate a new list of objects
+  var chartSpace = document.getElementById('chartSpace'); //access chart location on Page
+  chartSpace.innerHTML = '<canvas id="myChart" width="400" height="400"></canvas>'; // clear  canvas element
 }
