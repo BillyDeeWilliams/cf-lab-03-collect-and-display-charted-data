@@ -80,18 +80,16 @@ collectAll();
 console.log('off limits: ' + offLimits);
 
 function clickHandler(event){
-  if (globalClickCount > 25){
-    return;
-  }
-  addClick();
-  changePics();
-  collectAll();
   globalClickCount++;
-
-  if(globalClickCount === 25){
+  if(globalClickCount % 25 === 0){ // when globalclickcount is at  multiple of 25
     alert('Thank you for your participation!');
     createChart();
     saveToLS();
+  }
+  else {
+    addClick();
+    changePics();
+    collectAll();
   }
 }
 
@@ -242,4 +240,5 @@ clearLocal.addEventListener('click', buttonHandler);
 
 function buttonHandler(event){
   localStorage.clear();
+  globalClickCount = 0;
 }
