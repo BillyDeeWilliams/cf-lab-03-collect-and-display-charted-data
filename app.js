@@ -137,11 +137,26 @@ function randomNumber () {
   return(rand);
 }
 
-function genrateRandIndeces () {
+function genrateRandIndeces () { //check to make sure that the 'random' indices for the current set of three are different from eachother (no repeats on the same page)
   var randomIndex1a;
   var randomIndex2a;
   var randomIndex3a;
 
+  // var newRandIndex;
+  // var randomIndeces = [];
+  //
+  //
+  // for (i = 0; i < 3; i++){
+  //   do{
+  //     newRandIndex = randomNumber(); //asign a new random number (that is not one of the off limit values)
+  //   }
+  //   while (randomIndeces.indexOf(newRandIndex) !== -1);
+  //
+  //   randomIndeces.push(newRandIndex);
+  // }
+  // console.log(randomIndeces); //make sure it had three unique values
+  //return( randomIndeces); //return the array of unique values
+  //above return should be equivelant to the array being returned on (currently on) line 170
   randomIndex1a = randomNumber();
   randomIndex2a = randomNumber();
   randomIndex3a = randomNumber();
