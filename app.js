@@ -237,3 +237,9 @@ function saveToLS (){ //saves array to ls in stringified format for later retrie
   //console.log(stringifiedArray);
 
 }
+var clearLocal = document.getElementById('clear_local'); //select dom node, reffer to it with a var
+clearLocal.addEventListener('click', buttonHandler);
+
+function buttonHandler(event){
+  localStorage.clear();
+}
